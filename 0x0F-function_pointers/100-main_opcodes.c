@@ -1,17 +1,20 @@
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 /**
- * main -  A program that prints the opcodes
- * @argc: Argument count
- * @argv: Argument vector
- *
- * Return: Always 0 (Success)
- */
+ * main - Entry point
+ * Description: A program that prints the opcodes
+ * of its own main function
+ * @argc: argument counter
+ * @argv: argument vector
+ * Return: 0
+*/
+
 int main(int argc, char *argv[])
 {
-	int size, i;
-	char *array;
+	int index, nbytes;
+	char *ptr = (char *) main;
 
 	if (argc != 2)
 	{
@@ -19,24 +22,19 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	size = atoi(argv[1]);
-
-	if (size < 0)
+	nbytes = atoi(argv[1]);
+	if (nbytes < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
 
-	array = (char *)main;
-
-	for (i = 0; i < size; i++)
+	for (index = 0; index < nbytes; index++)
 	{
-		if (i == size - 1)
-		{
-			printf("%02hhx\n", array[i]);
-			break;
-		}
-		printf("%02hhx ", array[i]);
+		printf("%02x", ptr[index] & 0xFF);
+		if (index != nbytes - 1)
+			printf(" ");
 	}
+	printf("\n");
 	return (0);
 }
